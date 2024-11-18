@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpbsecurityinmemoryApplication<spbsecurityinmemory>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.sde.spbsecurityinmemory.SpbsecurityinmemoryApplication",
+            "projectName": "spbsecurityinmemory",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
