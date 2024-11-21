@@ -3,6 +3,7 @@ package com.sde.spbsecurityinmemory.Configurations;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -32,32 +33,19 @@ public class InMemoryConfig {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    // @Bean
-    // SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws Exception{
-    //     httpSecurity.authorizeHttpRequests((authorizeHttpRequests)->authorizeHttpRequests.requestMatchers("/testApi1/testPresident").hasRole("presdient")
-    //     .requestMatchers("/testApi1/testPresident").hasRole("presdient")
-    //     .requestMatchers("/testApi1/testPresident").hasRole("presdient")
-    //     .requestMatchers("/testApi1/testPresident").hasRole("presdient")
-    //     .requestMatchers("/testApi1/testPresident").hasRole("presdient").anyRequest().authenticated()).formLogin(withDefaults)
-    //     .logout();
-        
-    //     return httpSecurity.build();
-    // }
 
 
     @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-			.requestMatchers("/testApi1/testPresident").hasRole("presdient")
-        .requestMatchers("/testApi1/testManager").hasRole("manager")
-        .requestMatchers("/testApi1/testEmployee").hasRole("employee")
-        .requestMatchers("/testApi1/testWorker").hasRole("worker")
+			.requestMatchers("/testApi1/testPresident").hasAnyRole("president")
+        .requestMatchers("/testApi1/testManager").hasAnyRole("president","manager")
+        .requestMatchers("/testApi1/testEmployee").hasAnyRole("employee","manager","president")
+        .requestMatchers("/testApi1/testWorker").hasAnyRole("worker","president","manager")
 				.anyRequest().authenticated()
 			)
-			.formLogin((form) -> form
-				.loginPage("/testApi1/testSecurity")
-				.permitAll()
+			.formLogin((form)->form.defaultSuccessUrl("/testApi1/testSecurity", true).permitAll()
 			)
 			.logout((logout) -> logout.permitAll());
 

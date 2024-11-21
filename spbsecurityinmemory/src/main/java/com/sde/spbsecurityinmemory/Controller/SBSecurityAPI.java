@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("testApi1")
 public class SBSecurityAPI {
 
+    @GetMapping("/testManager")
+    public String getMethodName2() {
+        return "SpringSecurity In Memory Test successin /testManager";
+    }
     @GetMapping("/testSecurity")
     public String getMethodName0() {
         return "SpringSecurity In Memory Test success in login";
@@ -17,10 +21,6 @@ public class SBSecurityAPI {
         return "SpringSecurity In Memory Test success in /testPresident";
     }
 
-    @GetMapping("/testManager")
-    public String getMethodName2() {
-        return "SpringSecurity In Memory Test successin /testManager";
-    }
 
     @GetMapping("/testEmployee")
     public String getMethodName3() {
